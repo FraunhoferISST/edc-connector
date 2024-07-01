@@ -59,6 +59,100 @@ During the transfer process `SUSPENDING` phase, the `DataFlowController` will se
 
 During the transfer process `TERMINATING` phase, the `DataFlowController` will send a `DataFlowTerminateMessage` to the data plane. The data plane will transition the data flow to the `TERMINATED` state and invalidate the associated access token.
 
+### States
+
+The Data Plane Signaling protocol is represented by the following states:
+
+- **STARTED:** Transits to started, in case of a PUSH transfer, if a START message was received and the transfer could be initiated. In case of PULL, if the EDR token was issued and provided to CP successfully.
+- **RECEIVED:** Transits to received, in case of PUSH and a START message was received. Yet the transfer did not start so far, or failed to start and it will be retried.
+- **COMPLETED:** In case of PUSH transfer, if the transfer completed successfully. Proceeds to try to notify the CP about outcome.
+- **NOTIFIED:** Transits to notified, if the DP successfully sent an update about whether it completed or failed the transfer.
+- **FAILED:** Transits into failed state if: 1. In case of PUSH transfer, doing the transfer (even exhausted retries) failed or it could not be initiated. or 2. if notifying the CP about a 
+- **SUSPENDED:** In case the CP sent a Suspend Message.
+- **TERMINATED:** In case the CP sent a Terminate Message.
+
+##### State Machine
+
+The Data Plane Signaling state machine can be seen in the following diagram:
+
+### Message Types
+
+#### DataFlowStartMessage
+
+| Message Type        | Start                                                          |
+|---------------------|----------------------------------------------------------------|
+| **Sent by**         | Control Plane                                                  |
+| **Resulting state** | `RECEIVED` or `STARTED` dependent on `FlowType` (Push or Pull) |
+| **Response**        | DataFlowResponseMessage                                        |
+| **Schema**          | JSON Schema                                                    |
+| **Example**         |                                                                |
+| **Diagram(s)**      |                                                                |
+
+The lorem ipsum is sent to...
+
+#### DataFlowSuspendMessage
+
+| Message Type        | Suspend       |
+|---------------------|---------------|
+| **Sent by**         | Control Plane |
+| **Resulting state** | `SUSPENDED`   |
+| **Response**        | -             |
+| **Schema**          | JSON Schema   |
+| **Example**         |               |
+| **Diagram(s)**      |               |
+
+The lorem ipsum is sent to...
+
+#### DataFlowTerminateMessage
+
+| Message Type        | Terminate     |
+|---------------------|---------------|
+| **Sent by**         | Control Plane |
+| **Resulting state** | `TERMINATED`  |
+| **Response**        | -             |
+| **Schema**          | JSON Schema   |
+| **Example**         |               |
+| **Diagram(s)**      |               |
+
+The lorem ipsum is sent to...
+
+### Response Types
+
+lorem ipsum
+
+#### DataFlowResponseMessage
+
+| Message Type        | Response    |
+|---------------------|-------------|
+| **Sent by**         | Data Plane  |
+| **Schema**          | JSON Schema |
+| **Example**         |             |
+| **Diagram(s)**      |             |
+
+Gets sent by Data Plane to acknowledge a DataFlowStartMessage.
+
+#### TransferProcessComplete
+
+| Message Type        | Response    |
+|---------------------|-------------|
+| **Sent by**         | Data Plane  |
+| **Schema**          | JSON Schema |
+| **Example**         |             |
+| **Diagram(s)**      |             |
+
+Gets sent by Data Plane in case transfer process is completed.
+
+#### TransferProcessFailRequest
+
+| Message Type        | Response    |
+|---------------------|-------------|
+| **Sent by**         | Data Plane  |
+| **Schema**          | JSON Schema |
+| **Example**         |             |
+| **Diagram(s)**      |             |
+
+Gets sent by Data Plane in case the transfer process could not be started or failed.
+
 ## II. Control Plane Refactoring
 
 ### 1. DataAddress and Token Generation
