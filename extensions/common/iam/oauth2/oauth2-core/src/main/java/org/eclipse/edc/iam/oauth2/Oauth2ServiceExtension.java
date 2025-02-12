@@ -9,7 +9,7 @@
  *
  *  Contributors:
  *       Microsoft Corporation - initial API and implementation
- *       Fraunhofer Institute for Software and Systems Engineering - Improvements
+ *       Fraunhofer-Gesellschaft zur Förderung der angewandten Forschung e.V. - Improvements
  *       sovity GmbH - added issuedAt leeway
  *
  */
