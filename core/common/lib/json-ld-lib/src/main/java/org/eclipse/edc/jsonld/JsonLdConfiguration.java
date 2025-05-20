@@ -16,9 +16,13 @@ package org.eclipse.edc.jsonld;
 
 public class JsonLdConfiguration {
 
-    private boolean httpEnabled = false;
-    private boolean httpsEnabled = false;
-    private boolean avoidVocab = false;
+    //private boolean httpEnabled = false;
+    //private boolean httpsEnabled = false;
+    //private boolean avoidVocab = false;
+    // Fixed Violations: false is redundant
+    private boolean httpEnabled;
+    private boolean httpsEnabled;
+    private boolean avoidVocab;
     private boolean checkPrefixes = true;
 
     private JsonLdConfiguration() {

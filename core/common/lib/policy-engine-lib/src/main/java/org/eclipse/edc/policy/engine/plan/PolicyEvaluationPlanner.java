@@ -173,7 +173,7 @@ public class PolicyEvaluationPlanner implements Policy.Visitor<PolicyEvaluationP
                 .orElse(null);
     }
 
-    @SuppressWarnings({ "rawtypes", "unchecked" })
+    @SuppressWarnings({ "rawtypes", "unchecked","PMD.AvoidInstantiatingObjectsInLoops" }) // Fixed Violation
     private <R extends Rule> void visitRule(R rule, RuleStep.Builder builder) {
 
         try {

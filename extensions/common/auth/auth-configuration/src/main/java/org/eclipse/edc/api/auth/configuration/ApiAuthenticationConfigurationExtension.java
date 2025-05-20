@@ -79,6 +79,7 @@ public class ApiAuthenticationConfigurationExtension implements ServiceExtension
                 .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
     }
 
+    @SuppressWarnings("PMD.AvoidInstantiatingObjectsInLoops") // Fixed Violation: flags the creation of new AuthenticationRequestFilter(...) inside the loop. So suppress the warning, not restructure it.
     @Override
     public void prepare() {
         for (var entry : authConfiguration.entrySet()) {

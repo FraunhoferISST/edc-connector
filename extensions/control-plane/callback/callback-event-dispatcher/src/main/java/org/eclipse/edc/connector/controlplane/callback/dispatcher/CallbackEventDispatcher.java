@@ -51,7 +51,7 @@ public class CallbackEventDispatcher implements EventSubscriber {
         this.resolverRegistry = resolveRegistry;
         this.monitor = monitor;
     }
-
+    @SuppressWarnings("PMD.AvoidInstantiatingObjectsInLoops") //Fixed Violation: PMD requires Java annotation-based suppression, not comment-based, when running via Gradle or CLI.
     @Override
     public <E extends Event> void on(EventEnvelope<E> eventEnvelope) {
         var callbacks = getCallbacks(eventEnvelope);

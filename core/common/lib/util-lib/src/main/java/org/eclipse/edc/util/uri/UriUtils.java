@@ -38,7 +38,9 @@ public class UriUtils {
      * @return The string with the fragment part removed, if it exists, otherwise the original string.
      */
     private static String stripFragment(String uri) {
-        var ix = uri.indexOf("#");
+        // Fixed Violation:
+        // var ix = uri.indexOf("#"); // ❌ using String ""
+        var ix = uri.indexOf('#');  // ✅ now using char ''
         return ix >= 0 ? uri.substring(0, ix) : uri;
     }
 

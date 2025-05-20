@@ -38,7 +38,8 @@ public class DefaultServiceExtensionContext implements ServiceExtensionContext {
 
     private final Map<Class<?>, Object> services = new HashMap<>();
     private final Config config;
-    private boolean isReadOnly = false;
+    // private boolean isReadOnly = false;
+    private boolean isReadOnly; // Fixed Violation: false is redundant
     private String participantId;
     private String runtimeId;
     private String componentId;

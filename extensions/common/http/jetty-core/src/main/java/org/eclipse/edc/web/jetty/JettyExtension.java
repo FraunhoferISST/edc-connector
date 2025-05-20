@@ -33,6 +33,9 @@ import java.security.KeyStore;
 import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
 import java.security.cert.CertificateException;
+// Fixed Violation:  Avoiding direct use of low-level Java IO streams, especially FileInputStream and FileOutputStream
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 @Provides({ WebServer.class, JettyService.class })
 public class JettyExtension implements ServiceExtension {
@@ -81,7 +84,16 @@ public class JettyExtension implements ServiceExtension {
         if (keystorePath != null) {
             try {
                 ks = KeyStore.getInstance(keystoreType);
+                /*
                 try (var stream = new FileInputStream(keystorePath)) {
+                    ks.load(stream, jettyConfiguration.keystorePassword().toCharArray());
+                }
+                 */
+                // Fixed Violation: This uses java.nio.file.Files.newInputStream(...), which:
+                //                      Is the PMD-preferred method
+                //                      Still gives you an InputStream
+                //                      Avoids triggering AvoidFileStream
+                try (var stream = Files.newInputStream(Paths.get(keystorePath))) {
                     ks.load(stream, jettyConfiguration.keystorePassword().toCharArray());
                 }
             } catch (KeyStoreException | CertificateException | IOException | NoSuchAlgorithmException e) {

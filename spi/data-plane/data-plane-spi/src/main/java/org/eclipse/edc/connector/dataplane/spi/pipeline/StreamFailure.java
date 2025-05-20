@@ -32,7 +32,9 @@ public class StreamFailure extends Failure {
     @Override
     public String getFailureDetail() {
         var str = super.getFailureDetail();
-        return (str != null && !str.isEmpty()) ? (reason + ": " + str) : (reason + "");
+        // Fixed Violation: "AddEmptyString" Rule complains about appending an empty string just to convert something to String
+        // return (str != null && !str.isEmpty()) ? (reason + ": " + str) : (reason + "");
+        return (str != null && !str.isEmpty()) ? (reason + ": " + str) : reason.toString();
     }
 
     public Reason getReason() {

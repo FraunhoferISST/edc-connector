@@ -35,7 +35,9 @@ public abstract class RuleStep<R extends Rule> {
     public static final String EDC_RULE_FUNCTIONS = EDC_NAMESPACE + "ruleFunctions";
 
     protected R rule;
-    protected boolean isFiltered = false;
+    // Fixed Violation: false here is redundant
+    // protected boolean isFiltered = false;
+    protected boolean isFiltered;
 
     protected List<ConstraintStep> constraintSteps = new ArrayList<>();
     protected List<String> filteringReasons = new ArrayList<>();

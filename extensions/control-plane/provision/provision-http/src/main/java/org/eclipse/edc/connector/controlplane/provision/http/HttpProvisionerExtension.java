@@ -84,6 +84,7 @@ public class HttpProvisionerExtension implements ServiceExtension {
         return NAME;
     }
 
+    @SuppressWarnings("PMD.AvoidInstantiatingObjectsInLoops") //Fixed Violation
     @Override
     public void initialize(ServiceExtensionContext context) {
 

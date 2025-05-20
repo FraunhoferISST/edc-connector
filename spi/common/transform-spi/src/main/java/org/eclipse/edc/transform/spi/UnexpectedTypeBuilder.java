@@ -81,11 +81,16 @@ public class UnexpectedTypeBuilder extends AbstractProblemBuilder<UnexpectedType
         if (type != null) {
             builder.append(type);
             if (property != null) {
-                builder.append(" property '").append(property).append("'");
+                //builder.append(" property '").append(property).append("'");
+                String msg = " property '" + property + "'";
+                builder.append(msg);
             }
         } else {
             if (property != null) {
-                builder.append("Property '").append(property).append("'");
+                //builder.append("Property '").append(property).append("'");
+                String msg = " Property '" + property + "'";
+                builder.append(msg);
+
             }
         }
         if (expected.isEmpty()) {

@@ -26,7 +26,8 @@ public class TransactionManagerConfiguration {
     private String name;
     private String dataDir;
     private int timeout = -1;  // -1 indicates the default Atomikos timeout.
-    private boolean singleThreaded2Pc = false;
+    // private boolean singleThreaded2Pc = false;
+    private boolean singleThreaded2Pc; // Fixed Violation: Default is false; explicit init is redundant.
     private boolean enableLogging = true;
     private int checkPointInterval = -1;
 

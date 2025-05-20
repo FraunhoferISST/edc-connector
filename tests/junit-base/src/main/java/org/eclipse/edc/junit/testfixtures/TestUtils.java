@@ -26,7 +26,8 @@ public class TestUtils {
     public static final String GRADLE_WRAPPER;
     private static final String GRADLE_WRAPPER_UNIX = "gradlew";
     private static final String GRADLE_WRAPPER_WINDOWS = "gradlew.bat";
-    private static File buildRoot = null;
+    //private static File buildRoot = null;
+    private static File buildRoot; //Fixed Violation
 
     static {
         GRADLE_WRAPPER = (System.getProperty("os.name").toLowerCase().contains("win")) ? GRADLE_WRAPPER_WINDOWS : GRADLE_WRAPPER_UNIX;

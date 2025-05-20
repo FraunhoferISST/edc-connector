@@ -90,8 +90,10 @@ public class CommonsConnectionPoolConfig {
         private int minIdleConnections = 1;
         private boolean testConnectionOnBorrow = true;
         private boolean testConnectionOnCreate = true;
-        private boolean testConnectionOnReturn = false;
-        private boolean testConnectionWhileIdle = false;
+        // private boolean testConnectionOnReturn = false;
+        private boolean testConnectionOnReturn; // Fixed Violation: false is redundant
+        // private boolean testConnectionWhileIdle = false;
+        private boolean testConnectionWhileIdle; // Fixed Violation: false is redundant
         private String testQuery = "SELECT 1;";
 
         private Builder() {

@@ -35,7 +35,8 @@ public abstract class StatefulEntity<T extends StatefulEntity<T>> extends Mutabl
     protected long stateTimestamp;
     protected Map<String, String> traceContext = new HashMap<>();
     protected String errorDetail;
-    protected boolean pending = false;
+    //protected boolean pending = false;
+    private boolean pending; // Fixed Violation
 
     protected StatefulEntity() {
     }
@@ -152,7 +153,8 @@ public abstract class StatefulEntity<T extends StatefulEntity<T>> extends Mutabl
         }
 
         public B pending(boolean pending) {
-            entity.pending = pending;
+            //entity.pending = pending;
+            entity.setPending(pending); // Fixed Violation
             return self();
         }
 

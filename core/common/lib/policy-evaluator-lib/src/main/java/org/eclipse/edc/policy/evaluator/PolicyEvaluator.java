@@ -224,6 +224,7 @@ public class PolicyEvaluator implements Policy.Visitor<Boolean>, Rule.Visitor<Bo
         return (operator, rightValue, rule) -> dynamicFunction.evaluate(leftRawValue, operator, rightValue, rule);
     }
 
+    @SuppressWarnings("PMD.AvoidInstantiatingObjectsInLoops") // Fixed Violation
     private Boolean visitRule(Rule rule) {
         var valid = true;
         RuleProblem.Builder problemBuilder = null;

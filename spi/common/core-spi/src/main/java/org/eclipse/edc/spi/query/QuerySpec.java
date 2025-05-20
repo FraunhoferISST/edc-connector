@@ -36,7 +36,8 @@ public class QuerySpec {
     public static final String EDC_QUERY_SPEC_SORT_ORDER = EDC_NAMESPACE + "sortOrder";
     public static final String EDC_QUERY_SPEC_SORT_FIELD = EDC_NAMESPACE + "sortField";
 
-    private int offset = 0;
+    //private int offset = 0;
+    private int offset; // Fixed Violation
     private int limit = 50;
     private final List<Criterion> filterExpression = new ArrayList<>();
     private SortOrder sortOrder = SortOrder.ASC;

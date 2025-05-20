@@ -65,7 +65,9 @@ public class DataPlaneInstance extends StatefulEntity<DataPlaneInstance> {
     @Deprecated(since = "management-api:v3")
     private Set<String> allowedDestTypes = new HashSet<>();
     @Deprecated(since = "management-api:v3")
-    private int turnCount = 0;
+    // Fixed Violation: init value is redundant
+    // private int turnCount = 0;
+    private int turnCount;
     private long lastActive = Instant.now().toEpochMilli();
     private URL url;
 
