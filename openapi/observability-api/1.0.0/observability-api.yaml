@@ -2,6 +2,9 @@ openapi: 3.0.1
 info:
   title: observability-api
   description: REST API documentation for the observability-api
+  license:
+    name: "The Apache License, Version 2.0"
+    url: http://www.apache.org/licenses/LICENSE-2.0.txt
   version: 1.0.0
 servers:
 - url: /
@@ -64,40 +67,60 @@ paths:
                 $ref: "#/components/schemas/HealthStatus"
 components:
   schemas:
-    Failure:
-      type: object
-      properties:
-        failureDetail:
-          type: string
-          example: null
-        messages:
-          type: array
-          example: null
-          items:
-            type: string
-            example: null
-      example: null
-    HealthCheckResult:
-      type: object
-      properties:
-        component:
-          type: string
-          example: null
-        failure:
-          $ref: "#/components/schemas/Failure"
-        isHealthy:
-          type: boolean
-          example: null
-      example: null
     HealthStatus:
       type: object
       properties:
         componentResults:
           type: array
-          example: null
           items:
             $ref: "#/components/schemas/HealthCheckResult"
         isSystemHealthy:
           type: boolean
-          example: null
-      example: null
+      example:
+        isSystemHealthy: true
+        componentResults:
+        - component: component
+          failure:
+            failureDetail: failureDetail
+            messages:
+            - messages
+            - messages
+          isHealthy: true
+        - component: component
+          failure:
+            failureDetail: failureDetail
+            messages:
+            - messages
+            - messages
+          isHealthy: true
+    HealthCheckResult:
+      type: object
+      properties:
+        component:
+          type: string
+        failure:
+          $ref: "#/components/schemas/Failure"
+        isHealthy:
+          type: boolean
+      example:
+        component: component
+        failure:
+          failureDetail: failureDetail
+          messages:
+          - messages
+          - messages
+        isHealthy: true
+    Failure:
+      type: object
+      properties:
+        failureDetail:
+          type: string
+        messages:
+          type: array
+          items:
+            type: string
+      example:
+        failureDetail: failureDetail
+        messages:
+        - messages
+        - messages
