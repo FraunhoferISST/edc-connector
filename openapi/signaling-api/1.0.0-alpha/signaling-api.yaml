@@ -1,0 +1,204 @@
+openapi: 3.0.1
+info:
+  title: signaling-api
+  description: REST API documentation for the signaling-api
+  license:
+    name: "The Apache License, Version 2.0"
+    url: http://www.apache.org/licenses/LICENSE-2.0.txt
+  version: 1.0.0-alpha
+servers:
+- url: /
+paths:
+  /transfers/{transferId}/dataflow/prepared:
+    post:
+      tags:
+      - Data Plane Transfer events
+      description: Notify a prepared transfer
+      operationId: prepared
+      parameters:
+      - name: transferId
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DataFlowStatusMessage"
+      responses:
+        "200":
+          description: Prepared notification delivered correctly
+        "404":
+          description: Transfer process does not exist
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/ApiErrorDetail"
+  /transfers/{transferId}/dataflow/started:
+    post:
+      tags:
+      - Data Plane Transfer events
+      description: Notify a started transfer
+      operationId: started
+      parameters:
+      - name: transferId
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DataFlowStatusMessage"
+      responses:
+        "200":
+          description: Started notification delivered correctly
+        "404":
+          description: Transfer process does not exist
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/ApiErrorDetail"
+  /transfers/{transferId}/dataflow/errored:
+    post:
+      tags:
+      - Data Plane Transfer events
+      description: Notify an errored transfer
+      operationId: errored
+      parameters:
+      - name: transferId
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DataFlowStatusMessage"
+      responses:
+        "200":
+          description: Errored notification delivered correctly
+        "404":
+          description: Transfer process does not exist
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/ApiErrorDetail"
+  /transfers/{transferId}/dataflow/completed:
+    post:
+      tags:
+      - Data Plane Transfer events
+      description: Notify a completed transfer
+      operationId: completed
+      parameters:
+      - name: transferId
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Completed notification delivered correctly
+        "404":
+          description: Transfer process does not exist
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/ApiErrorDetail"
+components:
+  schemas:
+    ApiErrorDetail:
+      type: object
+      properties:
+        invalidValue:
+          type: string
+        message:
+          type: string
+        path:
+          type: string
+        type:
+          type: string
+      example:
+        message: error message
+        type: ErrorType
+        path: object.error.path
+        invalidValue: this value is not valid
+    DataFlowStatusMessage:
+      type: object
+      properties:
+        dataAddress:
+          $ref: "#/components/schemas/DspDataAddress"
+        error:
+          type: string
+        state:
+          type: string
+      example:
+        dataAddress:
+          endpoint: endpoint
+          endpointType: endpointType
+          '@type': '@type'
+          endpointProperties:
+          - '@type': '@type'
+            name: name
+            value: value
+          - '@type': '@type'
+            name: name
+            value: value
+        state: state
+        error: error
+    DspDataAddress:
+      type: object
+      properties:
+        '@type':
+          type: string
+        endpoint:
+          type: string
+        endpointProperties:
+          type: array
+          items:
+            $ref: "#/components/schemas/EndpointProperty"
+        endpointType:
+          type: string
+      example:
+        endpoint: endpoint
+        endpointType: endpointType
+        '@type': '@type'
+        endpointProperties:
+        - '@type': '@type'
+          name: name
+          value: value
+        - '@type': '@type'
+          name: name
+          value: value
+    EndpointProperty:
+      type: object
+      properties:
+        '@type':
+          type: string
+        name:
+          type: string
+        value:
+          type: string
+      example:
+        '@type': '@type'
+        name: name
+        value: value
